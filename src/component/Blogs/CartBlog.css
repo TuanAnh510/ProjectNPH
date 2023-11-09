@@ -1,0 +1,140 @@
+.slick-slide > div {
+  margin: 0 10px;
+}
+
+.slider {
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+.slider .next {
+  content: " ";
+  position: absolute;
+  left: -15px;
+  z-index: 99999999;
+  top: 40%;
+  width: 40px;
+  height: 40px;
+  background-image: url("https://mytindigital.com/images/prev.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* backgroundObjectFit: "cover"; */
+  background-size: cover;
+  object-fit: cover;
+}
+
+.slider .prew {
+  content: " ";
+  position: absolute;
+  right: -15px;
+  z-index: 99999999;
+  top: 40%;
+  width: 40px;
+  height: 40px;
+  background-image: url("https://mytindigital.com/images/next.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* backgroundObjectFit: "cover"; */
+  background-size: cover;
+  object-fit: cover;
+}
+
+.slick-list {
+  margin: 0 -10px;
+}
+
+.card {
+  /* border: 1px solid #6698ff; */
+  /* background: black; */
+  border-radius: 8px;
+  overflow: hidden;
+  height: 300px;
+  /* color: #fff; */
+  color: black;
+  cursor: pointer;
+  z-index: 1;
+  box-shadow: none !important;
+}
+
+
+.card-top h1 {
+  font-size: 0.9rem;
+  margin: 20px;
+}
+
+.card-top > img {
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
+  background: black;
+}
+
+.card-top img {
+  width: 100% !important;
+  /* max-height: 850px !important; */
+}
+
+.card-bottom {
+  margin: 10px 20px;
+}
+
+.category {
+  position: relative;
+  font-size: 12px;
+  top: 0;
+  left: 0;
+  text-align: left;
+}
+
+/* .category::before {
+      content: "";
+      background: #6698ff;
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      right: 0;
+      height: 2px;
+    } */
+.ant-rate {
+  font-size: 12px;
+  width: 120px;
+  height: 20px;
+  color: black;
+  position: relative;
+  left: -60px;
+}
+.image-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-container img {
+  transition: transform 0.5s ease;
+}
+
+.image-container:hover img {
+  transform: scale(1.2);
+}
+
+.image-container2 {
+  position: relative;
+}
+
+.image-container2 .image-2 {
+  display: none;
+}
+
+.image-container2:hover .image-1 {
+  display: none;
+  height: 50px;
+}
+
+.image-container2:hover .image-2 {
+  display: block;
+  height: 50px;
+}

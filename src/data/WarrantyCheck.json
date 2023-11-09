@@ -1,0 +1,40 @@
+{
+  "customerInfo": [
+    {
+      "name": "Cu đen",
+      "phone": "8.000.000",
+      "product": "Bao Con Ga",
+      "SERIALS": "A352456",
+      "timeBH": "36 tháng",
+      "TimeMH": "12/12/2023",
+      "Code": "A352456"
+    },
+        {
+      "name": "Cu trắng",
+      "phone": "1.000.000",
+      "product": "Ổ điện",
+      "SERIALS": "ABC12345",
+      "timeBH": "36 tháng",
+      "TimeMH": "12/12/2023",
+      "Code": "ABC12345"
+    },
+       {
+      "name": "Cu Tím",
+      "phone": "1.000.000",
+      "product": "Ổ điện",
+      "SERIALS": "ABC123457",
+      "timeBH": "36 tháng",
+      "TimeMH": "12/12/2023",
+      "Code": "ABC123457"
+    },   {
+      "name": "Cu đỏ",
+      "phone": "1.000.000",
+      "product": "Ổ điện",
+      "SERIALS": "ABC1234555",
+      "timeBH": "36 tháng",
+      "TimeMH": "12/12/2023",
+      "Code": "ABC1234555"
+    }
+  ]
+  
+}

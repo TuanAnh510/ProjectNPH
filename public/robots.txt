@@ -1,0 +1,15 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow: /index/
+Disallow: /product/
+Disallow: /about-us/
+Disallow: /checkout/
+Disallow: /checkout-rent/
+Disallow: /productrent/
+Disallow: /productsale/
+Disallow: /search/
+Disallow: /offer/
+Disallow: /privacy-policy/
+Disallow: /terms-and-conditions/
+Disallow: /warranty-check/
+
