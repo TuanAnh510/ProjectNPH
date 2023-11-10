@@ -24,7 +24,7 @@ import LoginModal from "@component/modal/LoginModal";
 import CartDrawer from "@component/drawer/CartDrawer";
 import { SidebarContext } from "@context/SidebarContext";
 import NavbarNew from "@layout/navbar/NavbarNew";
-import { CartRentContext } from "@context/CartRentContext";
+
 import CartRentDrawer from "@component/drawer/CartRentDrawer";
 import useAddRentToCart from "@hooks/useAddRentToCart";
 import diacritic from "diacritic";
@@ -37,7 +37,7 @@ const Navbar = ({ globalSetting }) => {
   const [searchText, setSearchText] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const { toggleCartDrawer, toggleCartRentDrawer } = useContext(SidebarContext);
-  const { totalItemRent } = useContext(CartRentContext);
+ 
   const { totalItems } = useCart();
   const router = useRouter();
   const { data: customPage } = useAsync(SettingServices.getCustomPage);
@@ -122,16 +122,7 @@ const Navbar = ({ globalSetting }) => {
               <button className="px-5 text-white text-2xl font-bold" aria-label="Total">
                 <BiGitCompare className="w-6 h-6 drop-shadow-xl" />
               </button> */}
-              <button
-                aria-label="Total"
-                onClick={toggleCartRentDrawer}
-                className="relative px-5 text-white text-2xl font-bold"
-              >
-                <span className="absolute z-10 top-0 right-0 inline-flex items-center justify-center p-1 h-5 w-5 text-xs font-medium leading-none text-white transform -translate-x-1/2 -translate-y-1 bg-green-600 rounded-full">
-                  {totalItemRent}
-                </span>
-                <img src="/rent.png" className="w-8 h-8 text-black" />
-              </button>
+            
 
               <button
                 aria-label="Total"

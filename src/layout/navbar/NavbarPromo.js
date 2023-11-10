@@ -81,11 +81,11 @@ const NavbarPromo = () => {
                         {t("common:Products-all")}
                       </a>
                     </Link>
-                    <Link href="/productrent">
+                    {/* <Link href="/productrent">
                       <a className="font-serif mx-4 py-2 text-[16px] font-medium hover:text-green-600">
                         {t("common:ProductRent")}
                       </a>
-                    </Link>
+                    </Link> */}
                     <Link href="/productsale">
                       <a className="font-serif mx-4 py-2 text-[16px] font-medium hover:text-green-600">
                         {t("common:discount-page")}

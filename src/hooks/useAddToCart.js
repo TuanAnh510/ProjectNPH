@@ -10,30 +10,33 @@ const useAddToCart = () => {
 
   const { t } = useTranslation()
   
-  const handleAddItem = (product) => {
+   const handleAddItem = (product) => {
+    // Kiểm tra xem item có rỗng hoặc không phải là số, đặt giá trị thành 0
+    const quantityToAdd = isNaN(item) || item === '' || item === "0" ? setItem(1) : parseInt(item);
+
     const result = items.find((i) => i.id === product.id);
-  
+
     if (result !== undefined) {
       if (
-        result?.quantity + item <=
+        result?.quantity + quantityToAdd <=
         (product?.variants?.length > 0
           ? product?.variant?.quantity
           : product?.stock)
       ) {
-        addItem(product, item);
-        notifySuccess(`${item} ${product.title}`);
+        addItem(product, quantityToAdd);
+        notifySuccess(`${quantityToAdd} ${product.title}`);
       } else {
         notifyError(t("common:Istock"));
       }
     } else {
       if (
-        item <=
+        quantityToAdd <=
         (product?.variants?.length > 0
           ? product?.variant?.quantity
           : product?.stock)
       ) {
-        addItem(product, item);
-        notifySuccess(`${item} ${product.title} ${t("common:addedToCart")}`);
+        addItem(product, quantityToAdd);
+        notifySuccess(`${quantityToAdd} ${product.title} ${t("common:addedToCart")}`);
       } else {
         notifyError(t("common:Istock"));
       }
@@ -41,11 +44,14 @@ const useAddToCart = () => {
   };
 
   const handleIncreaseQuantity = (product) => {
+    // Kiểm tra xem item có rỗng hoặc không phải là số, đặt giá trị thành 0
+    const quantityToAdd = isNaN(item) || item === '' || item === "0" ? setItem(1) : parseInt(item);
+
     const result = items?.find((p) => p.id === product.id);
 
     if (result) {
       if (
-        result?.quantity + item <=
+        result?.quantity + quantityToAdd <=
         (product?.variants?.length > 0
           ? product?.variant?.quantity
           : product?.stock)
@@ -56,6 +62,7 @@ const useAddToCart = () => {
       }
     }
   };
+
 
   return {
     setItem,

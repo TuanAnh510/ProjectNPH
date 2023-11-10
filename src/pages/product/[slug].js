@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import Link from "next/link";
 import { Disclosure } from "@headlessui/react";
 import { ChevronUpIcon } from "@heroicons/react/solid";
@@ -32,6 +32,7 @@ import Feeback from "@component/feeback/feeback";
 import StickyCart from "@component/cart/StickyCart";
 import useProductDetail from "@hooks/useProductDetail";
 import { DatePicker } from "antd";
+import { set } from "react-hook-form";
 
 const ProductScreen = ({ product, attributes, relatedProduct }) => {
   const {
@@ -73,6 +74,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
     handleCheckout,
     handleCheckoutRent,
   } = useProductDetail({ product, attributes, relatedProduct });
+  console.log(item);
 
   return (
     <>
@@ -132,7 +134,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                   <Discount slug={true} product={product} />
 
                   {product?.image[0] ? (
-                    <Image
+                    <img
                       src={img || product?.image[0]}
                       alt="product"
                       width={650}
@@ -140,7 +142,7 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                       priority
                     />
                   ) : (
-                    <Image
+                    <img
                       src="https://res.cloudinary.com/ahossain/image/upload/v1655097002/placeholder_kvepfp.png"
                       width={650}
                       height={650}
@@ -214,55 +216,37 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                             ))}
                           </div>
 
-                          <div className="mt-5 grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-0"></div>
-                          {product?.rent?.depositcost &&
-                            product?.rent?.monthlyrent &&
-                            product?.rent?.agree ? (
-                            <div className="mt-5">
-                              <label className="font-bold">
-                                {t("common:method")}
-                              </label>
-                              <select
-                                value={styleCheck}
-                                onChange={handleChangeSelect}
-                                className="block appearance-none  w-[80%] lg:w-[40%]  border-2 border-black hover:border-green-600 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline focus:border-green-600 "
-                              >
-                                <option value="payment">
-                                  {t("common:Option1")}
-                                </option>
-                                <option value="rent">
-                                  {t("common:Option2")}
-                                </option>
-                              </select>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-
+                    
                           <div className="flex items-center mt-4">
                             <div className="flex items-center justify-between space-s-3 sm:space-s-4 w-full">
                               <div className="group flex items-center justify-between rounded-md overflow-hidden flex-shrink-0 border h-11 md:h-12 border-gray-300">
                                 <button
-                                  onClick={() => setItem(item - 1)}
-                                  disabled={item === 1}
-                                  className="flex items-center justify-center flex-shrink-0 h-full transition ease-in-out duration-300 focus:outline-none w-8 md:w-12 text-heading border-e border-gray-300 hover:text-gray-500"
-                                >
-                                  <span className="text-dark text-base">
-                                    <FiMinus />
-                                  </span>
+                                    onClick={() => setItem(item - 1)}
+                                    disabled={item === 1}
+                                    className="flex items-center justify-center flex-shrink-0 h-full transition ease-in-out duration-300 focus:outline-none w-8 md:w-12 text-heading border-e border-gray-300 hover:text-gray-500"
+                                  >
+                                    <span className="text-dark text-base">
+                                      <FiMinus />
+                                    </span>
+                                  </button>
+                                  <input
+                                    value={item}
+                                    onChange={(e) => {
+                                      const value = parseInt(e.target.value, 10); // Chuyển đổi giá trị thành số nguyên
+                                      setItem(isNaN(value) ? '' : value); // Nếu giá trị không phải số, đặt giá trị là rỗng
+                                    }}
+                                    className="font-semibold text-center flex items-center justify-center h-full transition-colors duration-250 ease-in-out cursor-default flex-shrink-0 text-base text-heading w-8 md:w-20 xl:w-24"
+                                  />
+                                  <button
+                                    onClick={() => setItem(item + 1)}
+                                    disabled={selectVariant?.quantity <= item}
+                                    className="flex items-center justify-center h-full flex-shrink-0 transition ease-in-out duration-300 focus:outline-none w-8 md:w-12 text-heading border-s border-gray-300 hover:text-gray-500"
+                                  >
+                                    <span className="text-dark text-base">
+                                      <FiPlus />
+                                    </span>
                                 </button>
-                                <p className="font-semibold flex items-center justify-center h-full  transition-colors duration-250 ease-in-out cursor-default flex-shrink-0 text-base text-heading w-8  md:w-20 xl:w-24">
-                                  {item}
-                                </p>
-                                <button
-                                  onClick={() => setItem(item + 1)}
-                                  disabled={selectVariant?.quantity <= item}
-                                  className="flex items-center justify-center h-full flex-shrink-0 transition ease-in-out duration-300 focus:outline-none w-8 md:w-12 text-heading border-s border-gray-300 hover:text-gray-500"
-                                >
-                                  <span className="text-dark text-base">
-                                    <FiPlus />
-                                  </span>
-                                </button>
+
                               </div>
 
                               <button
@@ -271,124 +255,19 @@ const ProductScreen = ({ product, attributes, relatedProduct }) => {
                               >
                                 {"Thêm vào giỏ hàng"}
                               </button>
-                              <button
+                              {/* <button
                                 disabled={item?.length == 0}
                                 onClick={() => handleCheckout()}
                                 className="text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-serif text-center justify-center border-0 border-transparent rounded-md focus-visible:outline-none focus:outline-none text-white px-4 ml-4 md:px-5 lg:px-7 py-4 md:py-3.5 lg:py-4 hover:text-white bg-green-600 hover:bg-green-600 w-full h-12"
                               >
                                 {"Thanh toán"}
-                              </button>
+                              </button> */}
                             </div>
                           </div>
                         </>
                       ) : (
                         <>
-                          <div className="flex gap-3">
-                            <label> {t("common:Monthly-rent")}: </label>
-                            <span className="text-lg font-semibold text-gray-800">
-                              {Intl.NumberFormat("vi-VN", {
-                                style: "currency",
-                                currency: currency,
-                              }).format(Number(product?.rent?.monthlyrent))}
-                            </span>
-                          </div>
-
-                          <div className="flex gap-3">
-                            <p className="">{t("common:Deposit-fee")}:</p>
-                            <span className="text-lg font-semibold text-gray-800">
-                              {Intl.NumberFormat("vi-VN", {
-                                style: "currency",
-                                currency: currency,
-                              }).format(Number(product?.rent?.depositcost))}
-                            </span>
-                          </div>
-                          <div className="flex flex-col">
-                            <label className="">Từ ngày:</label>
-                            <DatePicker
-                              className="w-[200px]"
-                              selected={startDate}
-                              onChange={handleStartDateChange}
-                              dateFormat="dd/MM/yyyy"
-                              minDate={new Date()}
-                              placeholder="Chọn ngày bắt đầu "
-                            />
-                          </div>
-                          <div className="flex flex-col mt-2">
-                            {" "}
-                            <label>Đến:</label>
-                            <DatePicker
-                              className="w-[200px]"
-                              selected={endDate}
-                              onChange={handleEndDateChange}
-                              dateFormat="dd/MM/yyyy"
-                              minDate={new Date()}
-                              placeholder="Chọn ngày kết thúc"
-                            />
-                          </div>
-
-                          <div className="mt-5">
-                            <label className="">{t("common:method")}</label>
-                            <select
-                              value={styleCheck}
-                              onChange={handleChangeSelect}
-                              className="block appearance-none w-[80%] lg:w-[40%]  border border-gray-300 hover:border-green-600 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline focus:border-green-600 "
-                            >
-                              <option value="payment">
-                                {t("common:Option1")}
-                              </option>
-                              <option value="rent">
-                                {t("common:Option2")}
-                              </option>
-                            </select>
-                          </div>
-                          <div className="flex items-center mt-4">
-                            <div className="flex items-center justify-between space-s-3 sm:space-s-4 w-full">
-                              <div className="group flex items-center justify-between rounded-md overflow-hidden flex-shrink-0 border h-11 md:h-12 border-gray-300">
-                                <button
-                                  onClick={() => setItemRent(itemRent - 1)}
-                                  disabled={itemRent === 1}
-                                  className="flex items-center justify-center flex-shrink-0 h-full transition ease-in-out duration-300 focus:outline-none w-8 md:w-12 text-heading border-e border-gray-300 hover:text-gray-500"
-                                >
-                                  <span className="text-dark text-base">
-                                    <FiMinus />
-                                  </span>
-                                </button>
-                                <p className="font-semibold flex items-center justify-center h-full  transition-colors duration-250 ease-in-out cursor-default flex-shrink-0 text-base text-heading w-8  md:w-20 xl:w-24">
-                                  {itemRent}
-                                </p>
-                                <button
-                                  onClick={() => setItemRent(itemRent + 1)}
-                                  disabled={selectVariant?.quantity <= itemRent}
-                                  className="flex items-center justify-center h-full flex-shrink-0 transition ease-in-out duration-300 focus:outline-none w-8 md:w-12 text-heading border-s border-gray-300 hover:text-gray-500"
-                                >
-                                  <span className="text-dark text-base">
-                                    <FiPlus />
-                                  </span>
-                                </button>
-                              </div>
-
-                              <button
-                                onClick={() =>
-                                  handleAddItemRent(
-                                    product,
-                                    startDate,
-                                    endDate,
-                                    monthRent
-                                  )
-                                }
-                                className="text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-serif text-center justify-center border-0 border-transparent rounded-md focus-visible:outline-none focus:outline-none text-white px-4 ml-4 md:px-6 lg:px-8 py-4 md:py-3.5 lg:py-5 hover:text-white bg-green-600 hover:bg-green-600 w-full h-12"
-                              >
-                                {"Thêm vào giỏ hàng thuê"}
-                              </button>
-                              <button
-                                disabled={itemRent?.length == 0}
-                                onClick={() => handleCheckoutRent()}
-                                className="text-sm leading-4 inline-flex items-center cursor-pointer transition ease-in-out duration-300 font-semibold font-serif text-center justify-center border-0 border-transparent rounded-md focus-visible:outline-none focus:outline-none text-white px-4 ml-4 md:px-5 lg:px-7 py-4 md:py-3.5 lg:py-4 hover:text-white bg-green-600 hover:bg-green-600 w-full h-12"
-                              >
-                                {"Thanh toán"}
-                              </button>
-                            </div>
-                          </div>
+                          
                         </>
                       )}
 

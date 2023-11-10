@@ -123,6 +123,12 @@ const MyOrders = () => {
                               {t("common:BillOfLadingCode")}
                             </th>
                             <th
+                            scope="col"
+                            className="text-center text-xs font-serif font-semibold px-6 py-2 text-gray-700 uppercase tracking-wider"
+                          >
+                            {t("common:terms-condition-modification")}
+                          </th>
+                            <th
                               scope="col"
                               className="text-right text-xs font-serif font-semibold px-6 py-2 text-gray-700 uppercase tracking-wider"
                             >

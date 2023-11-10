@@ -85,11 +85,11 @@ const userSidebar = [
     href: "/user/my-orders",
     icon: IoListOutline,
   },
-  {
-    title: "Đơn hàng thuê của bạn",
-    href: "/user/my-ordersRent",
-    icon: IoListOutline,
-  },
+  // {
+  //   title: "Đơn hàng thuê của bạn",
+  //   href: "/user/my-ordersRent",
+  //   icon: IoListOutline,
+  // },
   {
     title: "Cập nhật trang cá nhân",
     href: "/user/update-profile",

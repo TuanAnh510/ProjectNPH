@@ -7,6 +7,8 @@ import useAsync from "@hooks/useAsync";
 import useTranslation from "next-translate/useTranslation";
 import OrderServices from "@services/OrderServices";
 import { SidebarContext } from "@context/SidebarContext";
+import Loading from "@component/preloader/Loading";
+
 const OrderHistory = ({ order }) => {
   const { t } = useTranslation();
   const { setIsUpdate } = useContext(SidebarContext);
@@ -19,6 +21,7 @@ const OrderHistory = ({ order }) => {
         notifySuccess("Cập nhật trạng thái thàng công!");
         setIsUpdate(true);
         order.status = "Cancel";
+        window.location.reload();
       })
       .catch((err) => notifyError("Cập nhật trạng thái thất bại!"));
   };
@@ -87,7 +90,7 @@ const OrderHistory = ({ order }) => {
         <>
           <td className="px-5 py-3 leading-6 text-center whitespace-nowrap">
             <span className="text-center ml-auto mr-auto font-medium font-serif text-gray-400">
-              Đã xem xét
+              Đã duyệt
             </span>
           </td>
         </>
